@@ -24,11 +24,8 @@ var gulp = require("gulp"),
 	};
 // 引用eslint校验文件
 gulp.task('eslint',function(){
-
 	return gulp.src(['js/*.js']) //指定的校验路径
-
 		.pipe(eslint({configFle:"./eslint.js"})) //使用你的eslint校验文件
-
 		.pipe(eslint.format())
 
 });
@@ -39,6 +36,7 @@ gulp.task("sass",function(){
 		.pipe(sass())
 		.pipe(gulp.dest("css/"))
 });
+
 //监测本地中的所有scss文件，有改变时就自动编译
 gulp.task("server",function(){
 	gulp.watch("sass/*.scss",["sass"]);
@@ -50,11 +48,13 @@ gulp.task("server",function(){
 		}));
 });
 
-gulp.task("uglify",function(){
+gulp.task("uglifys",function(){
 	gulp.src("js/*.js")
+		
+		.pipe(babel({
+            presets: ['es2015']
+		}))
 		.pipe(uglify())
-		.pipe(babel())
-		.pipe(rename('app.js'))
 		.pipe(gulp.dest("dist/js/"))
 });
 //img压缩
@@ -69,14 +69,18 @@ gulp.task('imagemin', function () {
         }))
         .pipe(gulp.dest(config.imgto));
 });
-// 检测图片、有就进行压缩
+
+// 监视文件变化，自动执行任务
 gulp.task("watchImagemin", function() {
-    gulp.watch(config.imgfrom, ['imagemin']);
+	gulp.watch(config.imgfrom, ['imagemin']);
+	gulp.watch('js/*.js',["uglifys"]);
 });
+
 // 更改版本名前先清除dist文件夹中的文件
 gulp.task('clean', function () {
     del(['dist']);
 });
+
 //更改版本名  加MD5后缀
 gulp.task('rev',function(){
 	return gulp.src(['css/*.css'])
@@ -86,6 +90,7 @@ gulp.task('rev',function(){
 		.pipe(gulp.dest('./'));
 
 });
+
 //静态资源路径的替换
 gulp.task("revCollector",function(){
 	return gulp.src(['rev-manifest.json',"music.html"])
@@ -104,4 +109,5 @@ gulp.task("revCollector",function(){
 		.pipe( gulp.dest('dist/') 
 	);
 });
-gulp.task("default",["clean","sass","server","rev","revCollector","uglify","imagemin","watchImagemin"]);
+
+gulp.task("default",["clean","sass","server","rev","revCollector","uglifys","imagemin","watchImagemin"]);
