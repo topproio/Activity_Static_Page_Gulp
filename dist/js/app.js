@@ -1,1 +1,1 @@
-"use strict";
+"use strict";function fn(){console.log(1),console.log(2)}setTimeout(function(){console.log(1)},1e3),fn();var foo=1,bar=2,baz=3;console.log(foo),console.log(bar),console.log(baz);
