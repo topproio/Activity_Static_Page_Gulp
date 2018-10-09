@@ -1,13 +1,5 @@
-setTimeout(()=>{
-    console.log(1)
-},1000)
-fn()
-function fn(){
-    console.log(1);
-    console.log(2)
-}
-
-let [foo, [[bar], baz]] = [1, [[2], 3]];
-console.log(foo);
-console.log(bar);
-console.log(baz);
+// 点击列表。切换样式
+$(".main_list nav").on("touchend",function(){
+    let ind = $(this).index();
+    $(this).addClass("list_style").siblings().removeClass("list_style");
+})
