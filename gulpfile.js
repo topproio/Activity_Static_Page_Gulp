@@ -16,6 +16,7 @@ const gulp = require("gulp"),
       imagemin = require("gulp-imagemin"),//压缩图片
       del = require("del"), //清除文件
       minifyCss = require('gulp-minify-css'),//压缩CSS为一行；
+      jshint = require("gulp-jshint"),//用来检查js代码
       eslint = require("gulp-eslint"); //引用eslint校验文件
 	   // 引用eslint校验文件
 	  gulp.task('eslint',function(){
@@ -68,6 +69,16 @@ const gulp = require("gulp"),
     gulp.task('clean', function () {
       return del(['dist/']);
     });
+    // 检查js代码
+    gulp.task('jsLint', function () {
+      gulp.src(["js/*.js","!js/*.min.js"])
+      .pipe(jshint(".jshintrc"))
+      .pipe(jshint.reporter()); // 输出检查结果
+  });
+  // 实时监控js的代码
+    gulp.task("watch", function () {
+      gulp.watch("js/*.js", ['jsLint']);
+    });
     //更改版本名  加MD5后缀
     gulp.task('rev',function(){
       return gulp.src(['css/*.css'])
@@ -96,6 +107,6 @@ const gulp = require("gulp"),
       );
     });
     // 开发环境实时监控、编译sass
-    gulp.task("default",["sass","server"]);
+    gulp.task("default",["sass","server","watch","jsLint"]);
     // 生产环境压缩、打包、拷贝
     gulp.task("bind",["clean","rev","uglifys","imagemin","copy","revCollector"]);
