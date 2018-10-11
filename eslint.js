@@ -2,11 +2,6 @@
  * @file ESLint Configuring
  * @description
  * Please visit [ESLint Rules]{@link https://eslint.org/docs/rules/}
- * | Date | Desc | Maintainer |
- * | :--: | :-- | :--: |
- * | 20180531 | v1.0.0 | daijinru
- * @version 1.0.0
- * @author daijinru <daijinru@weilaigongzuo.com>
  */
 
 module.exports = {
@@ -16,14 +11,13 @@ module.exports = {
         'ecmaVersion': 6,
         'sourceType': 'module'
     },
+    globals: {
+        "$": true,
+    },
     env: {
         browser: true,
     },
     extends: ['eslint:recommended'],
-    plugins: [
-        'vue',
-        'html'
-    ],
     rules: {
         'no-debugger': 0,
         'no-console': 0,

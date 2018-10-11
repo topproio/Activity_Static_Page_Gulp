@@ -1,5 +1,7 @@
 {
-  "common.css": "common-8325109b52.css",
-  "music.css": "music-65e1160624.css",
-  "reset.css": "reset-ba6bb2444e.css"
+  "app.js": "app-2b296553ea.js",
+  "common.css": "common-27c4d5963a.css",
+  "music.css": "music-bace2dbfc0.css",
+  "reset.css": "reset-71a0fab2b1.css",
+  "zepto.min.js": "zepto-1da68820c3.min.js"
 }
