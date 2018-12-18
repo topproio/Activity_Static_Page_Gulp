@@ -2,7 +2,7 @@
 
 ## Develop
 
-The resource paths in the development environment are all in src/*.
+The resource paths in the development environment are all in src/\*.
 
 ```
 npm run dev
@@ -10,7 +10,7 @@ npm run dev
 
 ## Build
 
-Resources in the production environment are copy to the dist/*.
+Resources in the production environment are copy to the dist/\*.
 
 ```
 npm run build
