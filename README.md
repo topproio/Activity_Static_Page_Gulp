@@ -1,4 +1,4 @@
-# Gulp Configuration For Activity Page
+# Gulp Configuration For Static Page
 
 ## Develop
 
